@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIMIT LABOR CHECK</title>
+    <title>限界労働診断</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --accent-color: #58a6ff; /* スタイリッシュな青 */
-            --text-main: #c9d1d9;
+            --bg-color: #5a5a5a;
+            --card-bg: #2a2a2a;
+            --accent-color: #e8e8e8;
+            --text-main: #b0b0b0;
             --text-bright: #ffffff;
         }
 
@@ -22,13 +22,12 @@
             overflow: hidden;
         }
         
-        /* フレームをシャープに、枠線を追加 */
         .card { 
             background: var(--card-bg); 
             padding: 50px 30px; 
-            border-radius: 4px; /* あえて角を丸めすぎない */
-            border: 1px solid #30363d;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+            border-radius: 4px;
+            border: 1px solid #3a3a3a;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8); 
             width: 85%; max-width: 380px; text-align: center;
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
@@ -38,52 +37,120 @@
         .hidden { display: none; }
 
         h1 { 
-            font-family: 'Oswald', sans-serif; 
-            letter-spacing: 2px; font-size: 1.2rem; color: var(--accent-color);
-            margin-bottom: 30px; text-transform: uppercase;
+            font-family: 'Noto Sans JP', sans-serif; 
+            letter-spacing: 1px; font-size: 1.1rem; color: var(--accent-color);
+            margin-bottom: 30px; font-weight: 700;
         }
 
         .question-text { font-size: 1.1rem; margin-bottom: 40px; color: var(--text-bright); font-weight: 300; }
 
-        /* ボタンを「枠線」メインのミニマルデザインに */
         .btn-group { display: flex; flex-direction: column; gap: 15px; }
         button { 
             background: transparent;
-            border: 1px solid #484f58; color: var(--text-main);
+            border: 1px solid #4a4a4a; color: var(--text-main);
             padding: 14px; border-radius: 2px; 
-            cursor: pointer; font-size: 0.9rem; letter-spacing: 1px;
+            cursor: pointer; font-size: 0.9rem; letter-spacing: 0.5px;
             transition: all 0.3s;
+            font-family: 'Noto Sans JP', sans-serif;
         }
-        button:hover { border-color: var(--accent-color); color: var(--accent-color); background: rgba(88, 166, 255, 0.05); }
+        button:hover { border-color: var(--text-bright); color: var(--text-bright); background: rgba(232, 232, 232, 0.08); }
         
-        /* 決定ボタンだけ光らせる */
-        .btn-yes { border-color: var(--accent-color); color: var(--accent-color); }
+        .btn-yes { border-color: var(--text-bright); color: var(--text-bright); }
         
-        .btn-x { 
+        .btn-close { 
             background: var(--text-bright); color: var(--bg-color); 
             border: none; font-weight: bold; margin-top: 30px; width: 100%;
+            font-family: 'Noto Sans JP', sans-serif;
         }
-        .btn-x:hover { background: var(--accent-color); color: white; }
+        .btn-close:hover { background: var(--accent-color); color: white; }
 
         #result-text { font-size: 1.8rem; letter-spacing: 4px; color: var(--text-bright); margin: 30px 0; }
+
+        .button-group-result { display: flex; flex-direction: column; gap: 10px; }
+        .button-group-result button { margin: 0; }
+
+        @keyframes slow-brighten {
+            0% { background-color: #5a5a5a; }
+            100% { background-color: #e8f4f8; }
+        }
+
+        @keyframes card-glow {
+            0% { background: var(--card-bg); box-shadow: 0 20px 50px rgba(0,0,0,0.8); border-color: #3a3a3a; }
+            100% { background: var(--card-bg); box-shadow: 0 20px 50px rgba(0,0,0,0.8); border-color: #3a3a3a; }
+        }
+
+        @keyframes hologram-red {
+            0%, 100% { color: #ff3333; text-shadow: 0 0 10px #ff3333, 0 0 20px #ff0000; }
+            50% { color: #ff6666; text-shadow: 0 0 20px #ff6666, 0 0 30px #ff3333; }
+        }
+
+        body.flash-yes {
+            animation: slow-brighten 2s ease-out forwards;
+        }
+
+        .card.flash-yes {
+            animation: none;
+            background: var(--card-bg);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        #result-text.flash-yes {
+            animation: hologram-red 2s ease-in-out forwards;
+            font-size: 2.2rem;
+            letter-spacing: 6px;
+        }
+
+        .btn-tweet {
+            background: #1DA1F2 !important;
+            border: 2px solid #1DA1F2 !important;
+            color: white !important;
+            font-size: 1.2rem !important;
+            font-weight: 900 !important;
+            letter-spacing: 1px !important;
+            padding: 18px !important;
+            font-family: 'Oswald', sans-serif !important;
+            transition: all 0.3s;
+        }
+
+        .btn-tweet:hover {
+            background: #1a91da !important;
+            border-color: #1a91da !important;
+            box-shadow: 0 0 30px rgba(29, 161, 242, 0.5);
+        }
+
+        @keyframes flash-bright {
+            0% { background-color: var(--bg-color); }
+            50% { background-color: #ffffff; }
+            100% { background-color: var(--bg-color); }
+        }
+
+        body.flash-yes {
+            animation: flash-bright 0.6s ease-out;
+        }
+
+        .card.flash-yes {
+            background: var(--card-bg);
+            box-shadow: 0 0 100px rgba(255, 255, 255, 0.8);
+        }
     </style>
 </head>
 <body>
 
     <div id="question-screen" class="card">
-        <h1>Limit Labor System</h1>
+        <h1>限界労働診断</h1>
         <p class="question-text">限界労働を<br>分かち合っていますか？</p>
         <div class="btn-group">
-            <button class="btn-yes" onclick="showResult(true)">YES / 分かち合っている</button>
-            <button class="btn-no" onclick="showResult(false)">NO / 不足している</button>
+            <button class="btn-yes" onclick="showResult(true)">はい</button>
+            <button class="btn-no" onclick="showResult(false)">いいえ</button>
         </div>
     </div>
 
     <div id="result-screen" class="card hidden">
-        <h1>Analysis Result</h1>
+        <h1>診断結果</h1>
         <p id="result-text"></p>
-        <button class="btn-x" onclick="shareX()">SHARE ON X</button>
-        <button onclick="location.reload()" style="border:none; color:#8b949e; margin-top:20px; font-size:0.7rem; text-decoration: underline;">REBOOT SYSTEM</button>
+        <div class="button-group-result">
+            <button id="tweet-btn" class="btn-tweet" onclick="shareX()">ツイート！！</button>
+        </div>
     </div>
 
     <script>
@@ -93,9 +160,23 @@
             const qScreen = document.getElementById('question-screen');
             const rScreen = document.getElementById('result-screen');
             const rText = document.getElementById('result-text');
+            const tweetBtn = document.getElementById('tweet-btn');
 
             finalResult = isYes ? "ﾗｲﾉﾎﾞｰ　ﾗｲﾉﾎﾞｰ" : "ﾗｲﾉﾎﾞｰ不足";
             rText.innerText = finalResult;
+
+            // 「はい」の場合は派手な演出
+            if (isYes) {
+                document.body.classList.add('flash-yes');
+                qScreen.classList.add('flash-yes');
+                rText.classList.add('flash-yes');
+                rScreen.classList.add('flash-yes');
+                tweetBtn.classList.add('btn-tweet');
+            } else {
+                // 「いいえ」の場合は旧式ボタン
+                tweetBtn.classList.remove('btn-tweet');
+                tweetBtn.textContent = 'ツイート';
+            }
 
             qScreen.classList.add('fade-out');
 
@@ -109,9 +190,9 @@
         }
 
         function shareX() {
-            const text = encodeURIComponent(`【限界労働診断】\nSTATUS: ${finalResult}\n#LimitLabor`);
+            const text = encodeURIComponent(`限界労働診断\nRESULT: ${finalResult}\n#限界労働診断`);
             const url = encodeURIComponent(window.location.href);
-            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+            window.open(`https://x.com/intent/tweet?text=${text}&url=${url}`, '_blank');
         }
     </script>
 </body>
