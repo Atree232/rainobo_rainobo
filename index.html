@@ -2,38 +2,58 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>私の診断アプリ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>限界労働診断</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; background: #f0f2f5; }
-        .card { background: white; padding: 30px; border-radius: 15px; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        button { background: #1da1f2; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-size: 16px; margin-top: 20px; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; text-align: center; padding: 50px; background: #eef2f3; color: #333; }
+        .card { background: white; padding: 40px; border-radius: 20px; display: inline-block; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 400px; }
+        h1 { font-size: 1.5rem; margin-bottom: 20px; }
+        .btn-group { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        button { border: none; padding: 12px 24px; border-radius: 30px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-yes { background: #ff4b2b; color: white; }
+        .btn-no { background: #666; color: white; }
+        .btn-x { background: #000; color: white; margin-top: 20px; }
+        #result { margin-top: 30px; font-size: 1.2rem; font-weight: bold; min-height: 100px; }
     </style>
 </head>
 <body>
+
     <div class="card">
-        <h1>性格診断</h1>
-        <p>ボタンを押すと結果が出るよ！</p>
-        <button onclick="check()">診断スタート</button>
+        <h1>限界労働診断</h1>
+        <p>質問：<br><strong>限界労働を分かち合ってますか？</strong></p>
+        
+        <div class="btn-group">
+            <button class="btn-yes" onclick="answer(true)">はい</button>
+            <button class="btn-no" onclick="answer(false)">いいえ</button>
+        </div>
+
         <div id="result"></div>
     </div>
 
     <script>
-        function check() {
-            const results = ["熱血タイプ🔥", "クールタイプ❄️", "おっとりタイプ🍀", "不思議ちゃんタイプ👽"];
-            const res = results[Math.floor(Math.random() * results.length)];
+        function answer(isYes) {
+            let resText = "";
+            if (isYes) {
+                resText = "ﾗｲﾉﾎﾞｰ　ﾗｲﾉﾎﾞｰ";
+            } else {
+                resText = "ﾗｲﾉﾎﾞｰ度が不足しているようです。";
+            }
             
-            document.getElementById('result').innerHTML = `<h2>結果：${res}</h2>`;
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<div>結果：<br>${resText}</div>`;
             
-            // X(Twitter)へのシェアボタンを作る
-            const text = encodeURIComponent(`私の性格は「${res}」でした！\n#性格診断 #GitHubPage`);
+            // X(Twitter)へのシェアボタンを追加
+            const shareText = encodeURIComponent(`【限界労働診断】\n質問：限界労働を分かち合ってますか？\n結果：${resText}\n`);
             const url = encodeURIComponent(window.location.href);
-            const xUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+            const xUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${url}`;
             
-            const btn = document.createElement("button");
-            btn.innerText = "Xで結果をシェアする";
-            btn.onclick = () => window.open(xUrl);
-            document.getElementById('result').appendChild(btn);
+            const xBtn = document.createElement("button");
+            xBtn.className = "btn-x";
+            xBtn.innerText = "結果を X に投稿する";
+            xBtn.onclick = () => window.open(xUrl, '_blank');
+            resultDiv.appendChild(xBtn);
         }
     </script>
+
 </body>
 </html>
