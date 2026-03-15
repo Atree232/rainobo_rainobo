@@ -9,7 +9,6 @@
         :root {
             --bg-color: #5a5a5a;
             --card-bg: #2a2a2a;
-            --accent-color: #e8e8e8;
             --text-main: #b0b0b0;
             --text-bright: #ffffff;
         }
@@ -17,8 +16,12 @@
         body { 
             font-family: 'Noto Sans JP', sans-serif; 
             background-color: var(--bg-color); 
-            display: flex; justify-content: center; align-items: center; 
-            height: 100vh; margin: 0; color: var(--text-main);
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            color: var(--text-main);
             overflow: hidden;
         }
         
@@ -28,70 +31,109 @@
             border-radius: 4px;
             border: 1px solid #3a3a3a;
             box-shadow: 0 20px 50px rgba(0,0,0,0.8); 
-            width: 85%; max-width: 380px; text-align: center;
+            width: 85%; 
+            max-width: 380px; 
+            text-align: center;
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .fade-out { opacity: 0; transform: scale(0.9); filter: blur(10px); }
-        .fade-in { opacity: 1; transform: scale(1); filter: blur(0); }
-        .hidden { display: none; }
+        .fade-out { 
+            opacity: 0; 
+            transform: scale(0.9); 
+            filter: blur(10px); 
+        }
+
+        .fade-in { 
+            opacity: 1; 
+            transform: scale(1); 
+            filter: blur(0); 
+        }
+
+        .hidden { 
+            display: none; 
+        }
 
         h1 { 
             font-family: 'Noto Sans JP', sans-serif; 
-            letter-spacing: 1px; font-size: 1.1rem; color: var(--accent-color);
-            margin-bottom: 30px; font-weight: 700;
+            letter-spacing: 1px; 
+            font-size: 1.1rem; 
+            color: var(--text-bright);
+            margin-bottom: 30px; 
+            font-weight: 700;
         }
 
-        .question-text { font-size: 1.1rem; margin-bottom: 40px; color: var(--text-bright); font-weight: 300; }
+        .question-text { 
+            font-size: 1.1rem; 
+            margin-bottom: 40px; 
+            color: var(--text-bright); 
+            font-weight: 300; 
+        }
 
-        .btn-group { display: flex; flex-direction: column; gap: 15px; }
+        .btn-group { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+        }
+
         button { 
             background: transparent;
-            border: 1px solid #4a4a4a; color: var(--text-main);
-            padding: 14px; border-radius: 2px; 
-            cursor: pointer; font-size: 0.9rem; letter-spacing: 0.5px;
+            border: 1px solid #4a4a4a; 
+            color: var(--text-main);
+            padding: 14px; 
+            border-radius: 2px; 
+            cursor: pointer; 
+            font-size: 0.9rem; 
+            letter-spacing: 0.5px;
             transition: all 0.3s;
             font-family: 'Noto Sans JP', sans-serif;
         }
-        button:hover { border-color: var(--text-bright); color: var(--text-bright); background: rgba(232, 232, 232, 0.08); }
-        
-        .btn-yes { border-color: var(--text-bright); color: var(--text-bright); }
-        
-        .btn-close { 
-            background: var(--text-bright); color: var(--bg-color); 
-            border: none; font-weight: bold; margin-top: 30px; width: 100%;
-            font-family: 'Noto Sans JP', sans-serif;
+
+        button:hover { 
+            border-color: var(--text-bright); 
+            color: var(--text-bright); 
+            background: rgba(232, 232, 232, 0.08); 
         }
-        .btn-close:hover { background: var(--accent-color); color: white; }
+        
+        .btn-yes { 
+            border-color: var(--text-bright); 
+            color: var(--text-bright); 
+        }
 
-        #result-text { font-size: 1.8rem; letter-spacing: 4px; color: var(--text-bright); margin: 30px 0; }
+        #result-text { 
+            font-size: 1.8rem; 
+            letter-spacing: 4px; 
+            color: var(--text-bright); 
+            margin: 30px 0; 
+        }
 
-        .button-group-result { display: flex; flex-direction: column; gap: 10px; }
-        .button-group-result button { margin: 0; }
+        .button-group-result { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+        }
+
+        .button-group-result button { 
+            margin: 0; 
+        }
 
         @keyframes slow-brighten {
             0% { background-color: #5a5a5a; }
             100% { background-color: #e8f4f8; }
         }
 
-        @keyframes card-glow {
-            0% { background: var(--card-bg); box-shadow: 0 20px 50px rgba(0,0,0,0.8); border-color: #3a3a3a; }
-            100% { background: var(--card-bg); box-shadow: 0 20px 50px rgba(0,0,0,0.8); border-color: #3a3a3a; }
-        }
-
         @keyframes hologram-red {
-            0%, 100% { color: #ff3333; text-shadow: 0 0 10px #ff3333, 0 0 20px #ff0000; }
-            50% { color: #ff6666; text-shadow: 0 0 20px #ff6666, 0 0 30px #ff3333; }
+            0%, 100% { 
+                color: #ff3333; 
+                text-shadow: 0 0 10px #ff3333, 0 0 20px #ff0000; 
+            }
+            50% { 
+                color: #ff6666; 
+                text-shadow: 0 0 20px #ff6666, 0 0 30px #ff3333; 
+            }
         }
 
         body.flash-yes {
             animation: slow-brighten 2s ease-out forwards;
-        }
-
-        .card.flash-yes {
-            animation: none;
-            background: var(--card-bg);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
         }
 
         #result-text.flash-yes {
@@ -109,7 +151,6 @@
             letter-spacing: 1px !important;
             padding: 18px !important;
             font-family: 'Oswald', sans-serif !important;
-            transition: all 0.3s;
         }
 
         .btn-tweet:hover {
@@ -117,31 +158,15 @@
             border-color: #1a91da !important;
             box-shadow: 0 0 30px rgba(29, 161, 242, 0.5);
         }
-
-        @keyframes flash-bright {
-            0% { background-color: var(--bg-color); }
-            50% { background-color: #ffffff; }
-            100% { background-color: var(--bg-color); }
-        }
-
-        body.flash-yes {
-            animation: flash-bright 0.6s ease-out;
-        }
-
-        .card.flash-yes {
-            background: var(--card-bg);
-            box-shadow: 0 0 100px rgba(255, 255, 255, 0.8);
-        }
     </style>
 </head>
 <body>
-
     <div id="question-screen" class="card">
         <h1>限界労働診断</h1>
         <p class="question-text">限界労働を<br>分かち合っていますか？</p>
         <div class="btn-group">
             <button class="btn-yes" onclick="showResult(true)">はい</button>
-            <button class="btn-no" onclick="showResult(false)">いいえ</button>
+            <button onclick="showResult(false)">いいえ</button>
         </div>
     </div>
 
@@ -149,7 +174,7 @@
         <h1>診断結果</h1>
         <p id="result-text"></p>
         <div class="button-group-result">
-            <button id="tweet-btn" class="btn-tweet" onclick="shareX()">ツイート！！</button>
+            <button id="tweet-btn" onclick="shareX()">ツイート</button>
         </div>
     </div>
 
@@ -165,15 +190,12 @@
             finalResult = isYes ? "ﾗｲﾉﾎﾞｰ　ﾗｲﾉﾎﾞｰ" : "ﾗｲﾉﾎﾞｰ不足";
             rText.innerText = finalResult;
 
-            // 「はい」の場合は派手な演出
             if (isYes) {
                 document.body.classList.add('flash-yes');
-                qScreen.classList.add('flash-yes');
                 rText.classList.add('flash-yes');
-                rScreen.classList.add('flash-yes');
                 tweetBtn.classList.add('btn-tweet');
+                tweetBtn.textContent = 'ツイート！！';
             } else {
-                // 「いいえ」の場合は旧式ボタン
                 tweetBtn.classList.remove('btn-tweet');
                 tweetBtn.textContent = 'ツイート';
             }
@@ -190,7 +212,7 @@
         }
 
         function shareX() {
-            const text = encodeURIComponent(`限界労働診断\nRESULT: ${finalResult}\n#限界労働診断`);
+            const text = encodeURIComponent(`${finalResult}\n#限界労働診断`);
             const url = encodeURIComponent(window.location.href);
             window.open(`https://x.com/intent/tweet?text=${text}&url=${url}`, '_blank');
         }
